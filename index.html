@@ -454,12 +454,16 @@
     });
 
     tableBody.addEventListener('click', (e) => {
-      const btn = e.target.closest('button[data-index]');
+      const btn = e.target.closest('button[data-type]');
       if (!btn) return;
-      const records = loadRecords();
+      const { assets, investments } = loadData();
       const index = Number(btn.dataset.index);
-      records.splice(index, 1);
-      saveRecords(records);
+      if (btn.dataset.type === 'Activo') {
+        assets.splice(index, 1);
+      } else {
+        investments.splice(index, 1);
+      }
+      saveData(assets, investments);
       render();
     });
 
