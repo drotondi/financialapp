@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Resumen de activos</h5>
+        <p class="card-text fs-3">${{ '%.2f'|format(total_assets) }} en total</p>
+        <a class="btn btn-outline-primary" href="{{ url_for('manage_assets') }}">Registrar nuevo activo</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Resumen de inversiones</h5>
+        <p class="card-text fs-3">${{ '%.2f'|format(total_investments) }} invertidos</p>
+        <a class="btn btn-outline-primary" href="{{ url_for('manage_investments') }}">Registrar nueva inversión</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-lg-6">
+    <h4>Últimos activos</h4>
+    <ul class="list-group">
+      {% for asset in assets[:5] %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ asset.name }}</strong><br>
+          <small class="text-muted">{{ asset.category }}{% if asset.acquired_on %} · {{ asset.acquired_on }}{% endif %}</small>
+        </div>
+        <span class="badge text-bg-primary">{{ asset.currency }} {{ '%.2f'|format(asset.value) }}</span>
+      </li>
+      {% else %}
+      <li class="list-group-item text-muted">Aún no has registrado activos.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="col-lg-6">
+    <h4>Últimas inversiones</h4>
+    <ul class="list-group">
+      {% for inv in investments[:5] %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ inv.name }}</strong><br>
+          <small class="text-muted">{{ inv.asset_class }}{% if inv.invested_on %} · {{ inv.invested_on }}{% endif %}</small>
+        </div>
+        <span class="badge text-bg-success">{{ inv.currency }} {{ '%.2f'|format(inv.amount) }}</span>
+      </li>
+      {% else %}
+      <li class="list-group-item text-muted">Aún no has registrado inversiones.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
