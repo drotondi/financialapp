@@ -1,17 +1,12 @@
 # financialapp
 
-Aplicación web sencilla para registrar activos personales e inversiones usando Flask y SQLite.
+Aplicación 100% HTML que guarda activos personales e inversiones en el navegador con `localStorage`. No requiere servidor ni dependencias.
 
-## Cómo ejecutar
+## Cómo usar
 
-1. Instala las dependencias:
-   ```bash
-   pip install -r requirements.txt
-   ```
-2. Inicia la aplicación:
-   ```bash
-   flask --app app run
-   ```
-3. Abre tu navegador en [http://localhost:5000](http://localhost:5000) y comienza a registrar tus datos.
+1. Descarga o clona este repositorio.
+2. Abre el archivo `index.html` en tu navegador preferido (puedes hacer doble clic o servirlo con `python -m http.server`).
+3. Registra activos e inversiones con los formularios; los totales se actualizan al instante.
+4. Usa los botones "Exportar JSON" y "Borrar datos" para respaldar o limpiar tu información local.
 
-La base de datos se crea automáticamente en `financial.db` la primera vez que visites la app.
+> Los datos permanecen únicamente en el dispositivo donde abras la página. Si limpias el caché del navegador, también se eliminarán.
